@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог блюд | Домашняя Кухня</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Навигация (аналогичная главной, но активна ссылка "Каталог") -->
+    <nav class="bg-white shadow-md sticky top-0 z-30">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <i class="fas fa-utensils text-red-500 text-2xl mr-2"></i>
+                    <a href="index.html" class="text-xl font-bold text-gray-800">Домашняя Кухня</a>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-red-500">Главная</a>
+                    <a href="catalog.html" class="text-red-500 font-semibold">Каталог</a>
+                    <a href="about.html" class="text-gray-700 hover:text-red-500">О нас</a>
+                </div>
+                
+                <div class="flex items-center">
+                    <button id="cartBtn" class="relative mr-6">
+                        <i class="fas fa-shopping-cart text-gray-700 text-xl"></i>
+                        <div class="cart-badge" id="cartBadge">0</div>
+                    </button>
+                    
+                    <button id="mobileMenuBtn" class="md:hidden">
+                        <i class="fas fa-bars text-gray-700 text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="mobileMenu" class="hidden md:hidden py-4 border-t">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-red-500">Главная</a>
+                    <a href="catalog.html" class="text-red-500 font-semibold">Каталог</a>
+                    <a href="about.html" class="text-gray-700 hover:text-red-500">О нас</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Сайдбар корзины -->
+    <div class="sidebar" id="cartSidebar">
+        <div class="h-full flex flex-col">
+            <div class="flex justify-between items-center p-6 border-b">
+                <h2 class="text-2xl font-bold text-gray-800">Корзина</h2>
+                <button id="closeCartBtn">
+                    <i class="fas fa-times text-gray-500 text-xl hover:text-gray-700"></i>
+                </button>
+            </div>
+            
+            <div class="flex-grow overflow-y-auto p-6" id="cartItems">
+                <div id="emptyCart" class="text-center py-10">
+                    <i class="fas fa-shopping-cart text-gray-300 text-5xl mb-4"></i>
+                    <p class="text-gray-500 text-lg">Ваша корзина пуста</p>
+                    <p class="text-gray-400 text-sm mt-2">Добавьте что-нибудь из каталога</p>
+                </div>
+                
+                <div id="cartProducts" class="space-y-4"></div>
+            </div>
+            
+            <div class="border-t p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold text-gray-700">Итого:</span>
+                    <span id="cartTotal" class="text-2xl font-bold text-gray-800">0 ₽</span>
+                </div>
+                <button id="checkoutBtn" class="w-full bg-red-500 text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    Оформить заказ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной контент каталога -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Каталог блюд</h1>
+        <p class="text-gray-600 mb-8">Выберите блюда на свой вкус</p>
+        
+        <!-- Фильтры по категориям -->
+        <div class="flex flex-wrap gap-3 mb-8" id="categoryFilters">
+            <button class="category-btn active" data-category="all">Все блюда</button>
+            <button class="category-btn" data-category="soups">Супы</button>
+            <button class="category-btn" data-category="main">Основные блюда</button>
+            <button class="category-btn" data-category="salads">Салаты</button>
+            <button class="category-btn" data-category="desserts">Десерты</button>
+            <button class="category-btn" data-category="drinks">Напитки</button>
+        </div>
+        
+        <!-- Каталог товаров -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="catalogProducts">
+            <!-- Товары будут добавляться через JavaScript -->
+        </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-utensils text-red-400 text-2xl mr-2"></i>
+                        <h2 class="text-xl font-bold">Домашняя Кухня</h2>
+                    </div>
+                    <p class="text-gray-400">Готовая еда как дома © 2023</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="index.html" class="text-gray-300 hover:text-white">Главная</a>
+                    <a href="catalog.html" class="text-gray-300 hover:text-white">Каталог</a>
+                    <a href="about.html" class="text-gray-300 hover:text-white">О нас</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно товара -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 id="modalProductName" class="text-2xl font-bold text-gray-800"></h2>
+                    <button id="closeModalBtn">
+                        <i class="fas fa-times text-gray-500 text-xl hover:text-gray-700"></i>
+                    </button>
+                </div>
+                
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/2 mb-6 md:mb-0">
+                        <img id="modalProductImage" src="" alt="" class="w-full h-64 md:h-80 object-cover rounded-xl">
+                    </div>
+                    
+                    <div class="md:w-1/2 md:pl-6">
+                        <p id="modalProductDescription" class="text-gray-600 mb-4"></p>
+                        
+                        <div class="mb-4">
+                            <span class="font-semibold">Категория:</span>
+                            <span id="modalProductCategory" class="ml-2 bg-red-100 text-red-800 text-sm px-2 py-1 rounded"></span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <span class="font-semibold">Время приготовления:</span>
+                            <span id="modalProductTime" class="ml-2"></span>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <span class="font-semibold">Калорийность:</span>
+                            <span id="modalProductCalories" class="ml-2"></span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <span id="modalProductPrice" class="text-2xl font-bold text-gray-800"></span>
+                                <span class="text-gray-500"> / порция</span>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <button id="modalDecreaseBtn" class="bg-gray-200 text-gray-700 w-8 h-8 rounded-l-lg hover:bg-gray-300">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span id="modalProductQuantity" class="bg-gray-100 w-10 h-8 flex items-center justify-center">1</span>
+                                <button id="modalIncreaseBtn" class="bg-gray-200 text-gray-700 w-8 h-8 rounded-r-lg hover:bg-gray-300">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button id="modalAddToCartBtn" class="w-full bg-red-500 text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition duration-200">
+                            Добавить в корзину
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключаем JavaScript -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Инициализация для страницы каталога
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализируем общие компоненты
+            initCommonComponents();
+            
+            // Загружаем все товары в каталог
+            loadCatalogProducts();
+            
+            // Инициализируем корзину
+            initCart();
+            
+            // Настраиваем фильтры
+            setupCategoryFilters();
+        });
+    </script>
+</body>
+</html>
